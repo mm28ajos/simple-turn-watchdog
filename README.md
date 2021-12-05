@@ -10,7 +10,7 @@ Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer 
 
 # Example Notification
 
-Mail on TURN error
+Mail on TURN error.
 ```
 Subject: TURN Watchdog detected failure on URI: 'turns:turn.example.com:5349'
 Body: empty
