@@ -1,0 +1,8 @@
+version: '2.2'
+services:
+  turn_watchdog:
+    container_name: turn_watchdog
+    image: mm28ajos/simple-turn-watchdog:latest
+    restart: unless-stopped
+    volumes:
+      - /path/to/.env:/usr/src/app/.env:ro

@@ -1,0 +1,15 @@
+{
+  "name": "TURNWatchdog",
+  "version": "1.0.0",
+  "description": "Monitor a TURN server for correct service.",
+  "author": "mm28ajos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.2",
+    "puppeteer": "^12.0.1",
+    "dotenv": "^10.0.0"
+  }
+}
