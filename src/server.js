@@ -9,6 +9,7 @@ const nodemailer = require("nodemailer");
        
 (async () => {
     const browser = await puppeteer.launch({
+      executablePath: '/usr/bin/chromium',
       args: ['--no-sandbox'],
       timeout: 10000,
     });
