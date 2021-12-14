@@ -1,6 +1,6 @@
 # Simple TURN Watchdog
 Send a mail notification if no TURN relay candidates on a given TURN URI are returned. Check's a TURN server regulary based on a defined interval in seconds.
-Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/. Refer to https://hub.docker.com/repository/docker/mm28ajos/simple-turn-watchdog for pre-build docker images.
+Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/. Refer to https://hub.docker.com/r/mm28ajos/simple-turn-watchdog for pre-build docker images.
 
 ## Features
 * check TURN server for relay candidates

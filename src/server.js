@@ -6,11 +6,11 @@ const puppeteer = require('puppeteer');
 const nodemailer = require("nodemailer");
 
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-       
+
 (async () => {
     const browser = await puppeteer.launch({
       executablePath: '/usr/bin/chromium',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      args: ['--no-sandbox'],
       timeout: 10000,
       headless: true
     });
@@ -21,12 +21,12 @@ const nodemailer = require("nodemailer");
     .on('pageerror', ({ message }) => console.log(message))
     .on('requestfailed', request =>
         console.log(`${request.failure().errorText} ${request.url()}`))
-    
-    function getTURNCredentials(secret){  
-            
+
+    function getTURNCredentials(secret){
+
         var crypto = require('crypto');
-    
-        const turnUsername = String(Math.floor(Date.now()/1000) + 30); 
+
+        const turnUsername = String(Math.floor(Date.now()/1000) + 30);
         var turnPassword;
         var hmac = crypto.createHmac('sha1', secret);
         hmac.setEncoding('base64');
@@ -40,7 +40,7 @@ const nodemailer = require("nodemailer");
     }
 
     function delay(time) {
-        return new Promise(function(resolve) { 
+        return new Promise(function(resolve) {
             setTimeout(resolve, time)
         });
     }
@@ -55,7 +55,7 @@ const nodemailer = require("nodemailer");
 
     // remove default URI
     await page.click('#remove');
-    
+
     while(true) {
       var turnCredentials = [];
       if (typeof process.env.TURN_SECRET !== 'undefined') {
@@ -82,10 +82,10 @@ const nodemailer = require("nodemailer");
       var candidates = await page.$eval('#candidates', element => element.innerHTML);
 
       console.log(candidates.includes("relay"));
-      
+
       // if no relay candidates are returned, send an e-mail
       if (!candidates.includes("relay")) {
-  
+
           let transporter = nodemailer.createTransport({
               host: process.env.MAIL_SMTP_HOST,
               port: 465,
@@ -99,8 +99,8 @@ const nodemailer = require("nodemailer");
           let info = await transporter.sendMail({
               from: process.env.MAIL_FROM,
               to: process.env.MAIL_TO,
-              subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'", 
-              text: "", 
+              subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'",
+              text: "",
           });
       }
 
@@ -119,20 +119,20 @@ const nodemailer = require("nodemailer");
 
 },{"crypto":72}],2:[function(require,module,exports){
     'use strict';
-    
+
     const asn1 = exports;
-    
+
     asn1.bignum = require('bn.js');
-    
+
     asn1.define = require('./asn1/api').define;
     asn1.base = require('./asn1/base');
     asn1.constants = require('./asn1/constants');
     asn1.decoders = require('./asn1/decoders');
     asn1.encoders = require('./asn1/encoders');
-    
+
     },{"./asn1/api":3,"./asn1/base":5,"./asn1/constants":9,"./asn1/decoders":11,"./asn1/encoders":14,"bn.js":16}],3:[function(require,module,exports){
     'use strict';
-    
+
     const encoders = require('./encoders');
     const decoders = require('./decoders');
     const inherits = require('inherits');
