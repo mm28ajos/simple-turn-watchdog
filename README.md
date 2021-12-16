@@ -11,6 +11,7 @@ Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer 
 * define delay of recheck in seconds
 * generate TURN credentials from TURN secret
 * use TURN username and password
+* increase delay recheck on each consecutive failure by an additional factor 1 to avoid mail spam
 
 # Example Notification
 

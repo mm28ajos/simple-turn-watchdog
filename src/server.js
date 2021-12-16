@@ -56,6 +56,9 @@ const nodemailer = require("nodemailer");
     // remove default URI
     await page.click('#remove');
 
+    var delayFactor = 1;
+    var appliedDelaySeconds;
+
     while(true) {
       var turnCredentials = [];
       if (typeof process.env.TURN_SECRET !== 'undefined') {
@@ -81,11 +84,18 @@ const nodemailer = require("nodemailer");
       // get inner html of table with relay candidates
       var candidates = await page.$eval('#candidates', element => element.innerHTML);
 
-      console.log(candidates.includes("relay"));
-
       // if no relay candidates are returned, send an e-mail
       if (!candidates.includes("relay")) {
 
+          console.log(new Date().toLocaleString() + ": TURN Watchdog detected failure on URI '" + process.env.TURN_URI + "'");
+
+          // increase delay factor
+          delayFactor++;
+
+          // do some logging
+          console.log(new Date().toLocaleString() + ": New delay factor: " + delayFactor);
+
+          // send mail
           let transporter = nodemailer.createTransport({
               host: process.env.MAIL_SMTP_HOST,
               port: 465,
@@ -96,12 +106,15 @@ const nodemailer = require("nodemailer");
               },
           });
 
-          let info = await transporter.sendMail({
-              from: process.env.MAIL_FROM,
-              to: process.env.MAIL_TO,
-              subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'",
-              text: "",
-          });
+          //let info = await transporter.sendMail({
+          //    from: process.env.MAIL_FROM,
+          //    to: process.env.MAIL_TO,
+          //    subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'",
+          //    text: "",
+          //});
+      } else {
+        //reset delay factor
+        delayFactor = 1;
       }
 
       // select last URI
@@ -112,27 +125,35 @@ const nodemailer = require("nodemailer");
       // remove last URI
       await page.click('#remove');
 
+      // calc current delay to apply
+      appliedDelaySeconds = (process.env.DELAY_SEC * delayFactor)
+
+      // limit delay to 24h
+      if (appliedDelaySeconds > 86400) {
+        appliedDelaySeconds = 86400;
+      }
+
       // wait for next TURN check
-      await delay(process.env.DELAY_SEC * 1000);
+      await delay(appliedDelaySeconds * 1000);
     }
 })();
 
 },{"crypto":72}],2:[function(require,module,exports){
     'use strict';
-
+    
     const asn1 = exports;
-
+    
     asn1.bignum = require('bn.js');
-
+    
     asn1.define = require('./asn1/api').define;
     asn1.base = require('./asn1/base');
     asn1.constants = require('./asn1/constants');
     asn1.decoders = require('./asn1/decoders');
     asn1.encoders = require('./asn1/encoders');
-
+    
     },{"./asn1/api":3,"./asn1/base":5,"./asn1/constants":9,"./asn1/decoders":11,"./asn1/encoders":14,"bn.js":16}],3:[function(require,module,exports){
     'use strict';
-
+    
     const encoders = require('./encoders');
     const decoders = require('./decoders');
     const inherits = require('inherits');
