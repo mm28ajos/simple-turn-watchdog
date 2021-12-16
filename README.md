@@ -34,6 +34,8 @@ services:
     restart: unless-stopped
     volumes:
       - /path/to/.env:/usr/src/app/.env:ro
+    environment:
+      - TZ=Europe/Berlin
 ```
 
 ### Configuration
