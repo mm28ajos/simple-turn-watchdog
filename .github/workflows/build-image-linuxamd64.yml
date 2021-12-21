@@ -1,5 +1,5 @@
 ---
-name: 'build images'
+name: 'build images linux/amd/64'
 
 on:
   push:
@@ -70,7 +70,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.prep.outputs.tags }}
       - name: Sync
