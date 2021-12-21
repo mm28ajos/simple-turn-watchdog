@@ -15,8 +15,10 @@ Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer 
 
 ## Supported Tags an Architectures
 Supported tags:
+
 * **latest** build from new last commit in master branch or monthly rebuild based on last commit on master branch.
-* **X.Y.Z** build from the release with respective tag vX.Y.Z. No regular rebuild. Build once and no update. 
+* **X.Y.Z** build from the release with respective tag vX.Y.Z. No regular rebuild. Build once and no update.
+
 Currently supported architectures:
 * linux/amd64
 * linux/arm/v7
