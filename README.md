@@ -1,9 +1,7 @@
 # Simple TURN Watchdog
 
 ![Docker Pulls](https://img.shields.io/docker/pulls/mm28ajos/simple-turn-watchdog.svg)
-![amd64 build](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-image-linuxamd64.yml/badge.svg)
-![arm64 build](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-image-linuxarm64.yml/badge.svg)
-![armv7 build](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-image-linuxarmv7.yml/badge.svg)
+![Docker Builds](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-images.yml/badge.svg)
 
 Send a mail notification if no TURN relay candidates on a given TURN URI are returned. Check's a TURN server regulary based on a defined interval in seconds.
 Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/. Refer to https://hub.docker.com/r/mm28ajos/simple-turn-watchdog for pre-build docker images.
