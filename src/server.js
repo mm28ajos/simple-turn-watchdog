@@ -106,12 +106,12 @@ const nodemailer = require("nodemailer");
               },
           });
 
-          //let info = await transporter.sendMail({
-          //    from: process.env.MAIL_FROM,
-          //    to: process.env.MAIL_TO,
-          //    subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'",
-          //    text: "",
-          //});
+          let info = await transporter.sendMail({
+              from: process.env.MAIL_FROM,
+              to: process.env.MAIL_TO,
+              subject: "TURN Watchdog detected failure on URI: '" + process.env.TURN_URI + "'",
+              text: "",
+          });
       } else {
         //reset delay factor
         delayFactor = 1;

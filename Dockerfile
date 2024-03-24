@@ -8,6 +8,6 @@ RUN apt update && apt install -y chromium
 
 RUN npm ci --only=production
 
-COPY src/* ./ 
+COPY src/ ./ 
 
 CMD [ "node", "server.js" ]
