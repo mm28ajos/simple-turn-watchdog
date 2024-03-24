@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 
 (async () => {
     const browser = await puppeteer.launch({
-      executablePath: '/usr/bin/chromium',
+      //executablePath: '/usr/bin/chromium',
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
       timeout: 10000,
       headless: true
@@ -46,7 +46,7 @@ const nodemailer = require("nodemailer");
     }
 
     // open trickle ICE page
-    await page.goto('file://' + __dirname + '/index.html');
+    await page.goto('file://' + __dirname + '/trickle-ice/index.html');
 
     // select default URI
     await page.evaluate(() => {
