@@ -3,34 +3,29 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/mm28ajos/simple-turn-watchdog.svg)
 ![Docker Builds](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-images.yml/badge.svg)
 
-Send a mail notification if no TURN relay candidates on a given TURN URI are returned. Check's a TURN server regulary based on a defined interval in seconds.
-Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/. Refer to https://hub.docker.com/r/mm28ajos/simple-turn-watchdog for pre-build docker images.
+Exposes a HTTP status page which reflects the health of the turn server. Status code 200 indicates that relay candidates are sent by the TURN server, a status code of 503 indicates no relay candidates were sent.  This status page can be monitored by third party tools such as [Kuma Monitor](https://github.com/louislam/uptime-kuma). Check's a TURN server regulary based on a defined interval in seconds.
+Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/.
+
+## Docker Hub
+Refer to https://hub.docker.com/r/mm28ajos/simple-turn-watchdog for pre-build docker images.
 
 ## Features
 * check TURN server for relay candidates
 * define delay of recheck in seconds
 * generate TURN credentials from TURN secret
 * use TURN username and password
-* increase delay recheck on each consecutive failure by an additional factor 1 to avoid mail spam
+* HTTP status page to included the TURN check e.g. in Kuma Monitor
 
 ## Supported Tags an Architectures
 Supported tags:
 
-* **architecture-latest** build from new last commit in master branch or monthly rebuild based on last commit on master branch.
-* **architecture-X.Y.Z** build from the release with respective tag vX.Y.Z. No regular rebuild. Build once and no update.
+* **latest** build from new last commit in master branch or monthly rebuild based on last commit on master branch.
+* **X.Y.Z** build from the release with respective tag vX.Y.Z. No regular rebuild. Build once and no update.
 
 Currently supported architectures:
 * linux/amd64
 * linux/arm/v7
 * linux/arm64
-
-## Example Notification
-
-Mail on TURN error.
-```
-Subject: TURN Watchdog detected failure on URI: 'turns:turn.example.com:5349'
-Body: empty
-```
 
 ## Getting started
 ### Docker Compose
@@ -63,13 +58,6 @@ TURN_PASSWORD=password
 
 # the URI of the TURN server to check 
 TURN_URI=turns:turn.example.com:5349
-
-# the SMTP settings
-MAIL_SMTP_HOST=smtp.example.com
-MAIL_SMTP_USER=user@example.com
-MAIL_SMTP_PASSWORD=hoisdhdshihiopsd
-MAIL_FROM=user@example.com
-MAIL_TO=user2@example.com
 
 # deplay in seconds before rechecking the TURN server
 DELAY_SEC=600
