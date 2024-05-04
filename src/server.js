@@ -65,15 +65,15 @@ app.listen(port, () => {
       // open trickle ICE page
       await page.goto('file://' + __dirname + '/src/content/peerconnection/trickle-ice/index.html');
 
-      // select default URI
-      await page.evaluate(() => {
-        document.querySelector('select#servers option:nth-child(1)').selected = true;
-      })
-
-      // remove default URI
-      await page.click('#remove');
-
       while (true) {
+        // select last URI
+        await page.evaluate(() => {
+          document.querySelector('select#servers option:nth-child(1)').selected = true;
+        })
+
+        // remove last URI
+        await page.click('#remove');
+
         var turnCredentials = [];
         if (typeof process.env.TURN_SECRET !== 'undefined') {
           // generate fresh TURN credentials
@@ -104,13 +104,8 @@ app.listen(port, () => {
           console.log(new Date().toLocaleString() + ": TURN Watchdog detected failure on URI '" + process.env.TURN_URI + "'");
         }
 
-        // select last URI
-        await page.evaluate(() => {
-          document.querySelector('select#servers option:nth-child(1)').selected = true;
-        })
-
-        // remove last URI
-        await page.click('#remove');
+	// reload page to get new IP adresse of TURN server in case it changed
+	await page.reload()
 
         // wait for next TURN check
         await delay(process.env.DELAY_SEC * 1000);
