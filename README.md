@@ -32,7 +32,6 @@ Currently supported architectures:
 Create a docker compose file, see an example below or in example folder.
 
 ```
-version: '2.2'
 services:
   turn_watchdog:
     container_name: turn_watchdog
