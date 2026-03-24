@@ -1,7 +1,8 @@
 # Simple TURN Watchdog
-
-![Docker Pulls](https://img.shields.io/docker/pulls/mm28ajos/simple-turn-watchdog.svg)
-![Docker Builds](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-images.yml/badge.svg)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mm28ajos/simple-turn-watchdog)](https://hub.docker.com/r/mm28ajos/simple-turn-watchdog)
+[![Docker Build](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-images.yml/badge.svg)](https://github.com/mm28ajos/simple-turn-watchdog/actions/workflows/build-images.yml)
+[![Docker Image Size](https://img.shields.io/docker/image-size/mm28ajos/simple-turn-watchdog/latest)](https://hub.docker.com/r/mm28ajos/simple-turn-watchdog)
+[![GitHub Release](https://img.shields.io/github/v/release/mm28ajos/simple-turn-watchdog)](https://github.com/mm28ajos/simple-turn-watchdog/releases)
 
 Exposes a HTTP status page which reflects the health of the turn server. Status code 200 indicates that relay candidates are sent by the TURN server, a status code of 503 indicates no relay candidates were sent.  This status page can be monitored by third party tools such as [Kuma Monitor](https://github.com/louislam/uptime-kuma). Check's a TURN server regulary based on a defined interval in seconds.
 Basically, a simple wrapper script around the WebRTC samples Trickle ICE, refer to https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/.
@@ -61,3 +62,11 @@ TURN_URI=turns:turn.example.com:5349
 # deplay in seconds before rechecking the TURN server
 DELAY_SEC=600
 ```
+## CI/CD: Build & Publish Logic
+
+This project uses **GitHub Actions** to:
+
+- Build multi-architecture images using **Buildx**
+- Tag images on `master` and Git tags
+- Push images to Docker Hub
+- Sync `README.md` to the Docker Hub repository page
