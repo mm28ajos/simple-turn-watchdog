@@ -70,3 +70,8 @@ This project uses **GitHub Actions** to:
 - Tag images on `master` and Git tags
 - Push images to Docker Hub
 - Sync `README.md` to the Docker Hub repository page
+
+## Build Triggers
+- Push to main
+- Git tags (e.g. v1.0.0)
+- Monthly cron (0 4 1 * *)
