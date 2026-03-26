@@ -26,7 +26,6 @@ Supported tags:
 Currently supported architectures:
 * linux/amd64
 * linux/arm/v7
-* linux/arm64
 
 ## Getting started
 ### Docker Compose
